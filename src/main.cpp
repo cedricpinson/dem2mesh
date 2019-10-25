@@ -1,4 +1,5 @@
 #include "tinytiffreader.h"
+#include <limits>
 #include <vector>
 
 int main(int argc, char** argv)
@@ -33,7 +34,7 @@ int main(int argc, char** argv)
         return 1;
         break;
     default:
-        printf("unkown tiff sample format, unsupported\n");
+        printf("unknown tiff sample format, unsupported\n");
         return 1;
     }
 
@@ -41,6 +42,15 @@ int main(int argc, char** argv)
 
     TinyTIFFReader_getSampleData(tiffr, &buffer[0], 0);
     TinyTIFFReader_close(tiffr);
+
+    const float* data = &buffer[0];
+    printf("min float value %f\n", -std::numeric_limits<float>::max());
+    for (int i = 0; i < width * height; i++) {
+        if (buffer[i] < 0.0f)
+            continue;
+
+        printf("%f\n", buffer[i]);
+    }
 
     return 0;
 }
