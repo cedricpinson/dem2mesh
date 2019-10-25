@@ -1,0 +1,13 @@
+# Build Dir #
+build*/
+product/
+product-wasm/
+# User dependencies #
+deps/glfw/
+deps/curl-bin/
+vs/
+.idea/
+cmake-build-*
+# Qt config file
+CMakeLists.txt.user
+imgui.ini
